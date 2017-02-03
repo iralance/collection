@@ -25,7 +25,39 @@ $orders = [[
 //    return $order['price'];
 //})->sum());
 
-dump(collect($orders)->pluck('order_products')->flatten(1)->map(function($order){
-    return $order['price'];
-})->sum());
+//dump(collect($orders)->pluck('order_products')->flatten(1)->map(function($order){
+//    return $order['price'];
+//})->sum());
 
+
+//old
+/*$events = json_decode(file_get_contents('./data.json'),true);
+
+$score = 0;
+foreach($events as $event){
+    switch ($event['type']){
+        case 'PushEvent':
+            $score+=5;
+            break;
+        case 'CreateEvent':
+            $score+=4;
+            break;
+        case 'IssueEvent':
+            $score+=3;
+            break;
+        case 'IssueCommentEvent':
+            $score+=2;
+            break;
+        default:
+            $score+=1;
+            break;
+    }
+}
+echo $score;*/
+
+
+$events = collect(json_decode(file_get_contents('./data.json'),true));
+dump($events->map(function($event){
+    //return $event['type'];
+    return collect(['PushEvent'=>5,'CreateEvent'=>4,'IssueEvent'=>3,'IssueCommentEvent'=>2])->get($event['type'],1);
+})->sum());
