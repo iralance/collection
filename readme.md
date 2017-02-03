@@ -1,6 +1,9 @@
-###usage
-collect统计多维数组里的金额,以前是通过foreach来实现的
-
 ###安装
 composer install
 
+
+###usage
+
+* 统计多维数组里的金额,以前是通过foreach来实现的
+
+###[document](http://www.golaravel.com/laravel/docs/5.1/collections/#creating-collections)
